@@ -8,6 +8,10 @@ This repository focuses on the part many RAG diagrams leave out: **where the sys
 
 ## Architecture
 
+![Secure Enterprise RAG on Azure](architecture/secure-enterprise-rag.svg)
+
+[Architecture details](architecture/README.md) · [Threat model](docs/threat-model.md) · [Security controls](docs/security-controls.md) · [Validation checklist](docs/validation-checklist.md)
+
 ```text
 Users
   ↓
@@ -156,17 +160,23 @@ Before production, verify that:
 - [ ] Responses can be traced to their supporting sources.
 - [ ] Security controls have been validated with negative tests—not only happy-path testing.
 
-## Repository Roadmap
+## Repository Contents
 
-This repository will expand with:
+- [x] Reference architecture graphic and logical flow
+- [x] RAG threat model
+- [x] MITRE ATLAS candidate mappings
+- [x] Azure security-control matrix
+- [x] Production validation checklist
+- [ ] Deployment and configuration examples
+- [ ] Sample authorization/security-filter implementation
+- [ ] Adversarial test cases and evaluation examples
 
-- the full reference architecture graphic;
-- detailed Azure service implementation notes;
-- a RAG threat model;
-- MITRE ATLAS mappings where applicable;
-- a security-control matrix;
-- deployment and configuration examples; and
-- practical validation scenarios.
+### Deep dives
+
+- **[Architecture](architecture/README.md)** — trust boundaries, flow, and security layers.
+- **[Threat Model](docs/threat-model.md)** — assets, abuse paths, MITRE ATLAS mappings, and adversarial test scenarios.
+- **[Security Controls](docs/security-controls.md)** — identity, retrieval, networking, governance, telemetry, and Azure control mapping.
+- **[Validation Checklist](docs/validation-checklist.md)** — negative authorization, prompt-injection, poisoning, leakage, network, and operational release tests.
 
 ## Scope
 
