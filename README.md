@@ -171,7 +171,7 @@ Before production, verify that:
 - [x] Sample authorization/security-filter implementation
 - [x] Adversarial security test cases
 - [ ] Deployment and configuration examples
-- [ ] Evaluation harness and automated test execution
+- [x] Evaluation harness and automated test execution
 
 ### Deep dives
 
@@ -180,6 +180,7 @@ Before production, verify that:
 - **[Security Controls](docs/security-controls.md)** — identity, retrieval, networking, governance, telemetry, and Azure control mapping.
 - **[Validation Checklist](docs/validation-checklist.md)** — negative authorization, prompt-injection, poisoning, leakage, network, and operational release tests.
 - **[Examples](examples/README.md)** — ACL-aware schema, sample documents, trusted authorization filters, and adversarial test cases.
+- **[Automated Security Tests](tests/README.md)** — executable authorization and retrieval-policy checks, with GitHub Actions CI.
 
 ## Scope
 
