@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="920" viewBox="0 0 1400 920">
+<rect width="1400" height="920" fill="#f7f9fc"/>
+<text x="70" y="65" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#0078D4" letter-spacing="2">AZURE REFERENCE ARCHITECTURE</text>
+<text x="70" y="120" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="700" fill="#102A43">Secure Enterprise RAG</text>
+<text x="70" y="155" font-family="Arial,Helvetica,sans-serif" font-size="20" fill="#486581">Identity-gated access • permission-aware retrieval • grounded generation</text>
+<line x1="70" y1="185" x2="1330" y2="185" stroke="#d9e2ec" stroke-width="2"/>
+
+<text x="70" y="235" font-family="Arial" font-size="17" font-weight="700" fill="#0078D4">01  REQUEST + IDENTITY</text>
+<g font-family="Arial" text-anchor="middle">
+<rect x="70" y="260" width="250" height="105" rx="14" fill="#fff" stroke="#0078D4" stroke-width="2"/>
+<text x="195" y="305" font-size="22" font-weight="700" fill="#102A43">Users</text><text x="195" y="336" font-size="16" fill="#627D98">Question + user context</text>
+<rect x="395" y="260" width="250" height="105" rx="14" fill="#fff" stroke="#0078D4" stroke-width="2"/>
+<text x="520" y="305" font-size="22" font-weight="700" fill="#102A43">Microsoft Entra ID</text><text x="520" y="336" font-size="16" fill="#627D98">Authentication + claims</text>
+<rect x="720" y="260" width="250" height="105" rx="14" fill="#fff" stroke="#0078D4" stroke-width="2"/>
+<text x="845" y="305" font-size="22" font-weight="700" fill="#102A43">Application / API</text><text x="845" y="336" font-size="16" fill="#627D98">Authorize + orchestrate</text>
+</g>
+<g stroke="#0078D4" stroke-width="4" fill="none"><line x1="320" y1="312" x2="390" y2="312"/><line x1="645" y1="312" x2="715" y2="312"/></g>
+<g fill="#0078D4"><polygon points="390,312 378,305 378,319"/><polygon points="715,312 703,305 703,319"/></g>
+
+<text x="70" y="425" font-family="Arial" font-size="17" font-weight="700" fill="#0078D4">02  RETRIEVAL + DATA INTEGRITY</text>
+<g font-family="Arial" text-anchor="middle">
+<rect x="70" y="450" width="250" height="105" rx="14" fill="#fff" stroke="#5B9BD5" stroke-width="2"/>
+<text x="195" y="495" font-size="22" font-weight="700" fill="#102A43">Enterprise Data</text><text x="195" y="526" font-size="16" fill="#627D98">Approved source systems</text>
+<rect x="395" y="450" width="250" height="105" rx="14" fill="#fff" stroke="#5B9BD5" stroke-width="2"/>
+<text x="520" y="495" font-size="22" font-weight="700" fill="#102A43">Ingestion Pipeline</text><text x="520" y="526" font-size="16" fill="#627D98">Validate + retain ACLs</text>
+<rect x="720" y="450" width="250" height="105" rx="14" fill="#eaf4ff" stroke="#0078D4" stroke-width="2"/>
+<text x="845" y="495" font-size="22" font-weight="700" fill="#102A43">Azure AI Search</text><text x="845" y="526" font-size="16" fill="#627D98">Filter + retrieve</text>
+</g>
+<g stroke="#5B9BD5" stroke-width="4" fill="none"><line x1="320" y1="502" x2="390" y2="502"/><line x1="645" y1="502" x2="715" y2="502"/></g>
+<g fill="#5B9BD5"><polygon points="390,502 378,495 378,509"/><polygon points="715,502 703,495 703,509"/></g>
+<rect x="1005" y="260" width="325" height="295" rx="16" fill="#fff" stroke="#d9e2ec" stroke-width="2"/>
+<text x="1035" y="300" font-family="Arial" font-size="17" font-weight="700" fill="#0078D4">CROSS-CUTTING CONTROLS</text>
+<g font-family="Arial" font-size="17" fill="#334E68"><text x="1035" y="340">• Managed Identity</text><text x="1035" y="375">• Key Vault</text><text x="1035" y="410">• Private Link</text><text x="1035" y="445">• Azure Monitor</text><text x="1035" y="480">• Microsoft Defender</text><text x="1035" y="515">• Purview + Azure Policy</text></g>
+
+<text x="70" y="615" font-family="Arial" font-size="17" font-weight="700" fill="#0078D4">03  GROUNDED GENERATION</text>
+<g font-family="Arial" text-anchor="middle">
+<rect x="70" y="640" width="250" height="105" rx="14" fill="#fff" stroke="#0078D4" stroke-width="2"/>
+<text x="195" y="685" font-size="22" font-weight="700" fill="#102A43">Application / API</text><text x="195" y="716" font-size="16" fill="#627D98">Build bounded context</text>
+<rect x="395" y="640" width="250" height="105" rx="14" fill="#eaf4ff" stroke="#0078D4" stroke-width="2"/>
+<text x="520" y="685" font-size="22" font-weight="700" fill="#102A43">Azure AI Foundry</text><text x="520" y="716" font-size="16" fill="#627D98">Model inference</text>
+<rect x="720" y="640" width="250" height="105" rx="14" fill="#fff" stroke="#0078D4" stroke-width="2"/>
+<text x="845" y="685" font-size="22" font-weight="700" fill="#102A43">Answer + Citations</text><text x="845" y="716" font-size="16" fill="#627D98">Validate before display</text>
+</g>
+<g stroke="#0078D4" stroke-width="4" fill="none"><line x1="320" y1="692" x2="390" y2="692"/><line x1="645" y1="692" x2="715" y2="692"/></g>
+<g fill="#0078D4"><polygon points="390,692 378,685 378,699"/><polygon points="715,692 703,685 703,699"/></g>
+
+<rect x="1005" y="595" width="325" height="150" rx="16" fill="#fff4f4" stroke="#f4b4b4" stroke-width="2"/>
+<text x="1035" y="635" font-family="Arial" font-size="17" font-weight="700" fill="#b42318">SECURITY PLANE</text>
+<g font-family="Arial" font-size="15" fill="#7a271a"><text x="1035" y="670">Prompt injection • Indirect injection</text><text x="1035" y="700">RAG poisoning • Data exposure</text><text x="1035" y="730">Unauthorized retrieval • API abuse</text></g>
+
+<rect x="70" y="795" width="1260" height="78" rx="16" fill="#0b2d4d"/>
+<text x="100" y="828" font-family="Arial" font-size="15" font-weight="700" fill="#67c1ff">DESIGN PRINCIPLE</text>
+<text x="100" y="857" font-family="Arial" font-size="23" font-weight="700" fill="#ffffff">Retrieval authorization is enforced before source text reaches the model.</text>
+</svg>
