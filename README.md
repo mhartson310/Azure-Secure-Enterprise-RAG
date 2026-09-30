@@ -167,9 +167,11 @@ Before production, verify that:
 - [x] MITRE ATLAS candidate mappings
 - [x] Azure security-control matrix
 - [x] Production validation checklist
+- [x] Secure retrieval examples
+- [x] Sample authorization/security-filter implementation
+- [x] Adversarial security test cases
 - [ ] Deployment and configuration examples
-- [ ] Sample authorization/security-filter implementation
-- [ ] Adversarial test cases and evaluation examples
+- [ ] Evaluation harness and automated test execution
 
 ### Deep dives
 
@@ -177,6 +179,7 @@ Before production, verify that:
 - **[Threat Model](docs/threat-model.md)** — assets, abuse paths, MITRE ATLAS mappings, and adversarial test scenarios.
 - **[Security Controls](docs/security-controls.md)** — identity, retrieval, networking, governance, telemetry, and Azure control mapping.
 - **[Validation Checklist](docs/validation-checklist.md)** — negative authorization, prompt-injection, poisoning, leakage, network, and operational release tests.
+- **[Examples](examples/README.md)** — ACL-aware schema, sample documents, trusted authorization filters, and adversarial test cases.
 
 ## Scope
 
