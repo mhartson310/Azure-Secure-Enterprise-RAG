@@ -174,7 +174,7 @@ This is a **reference architecture**, not a one-size-fits-all deployment templat
 
 ## Author
 
-**Mario Hartson**  
+**Mario Worwell**  
 Cloud Security Architect | Azure | AI Security | SIEM/XDR
 
 Practical cloud-security architectures, detection engineering, governance patterns, and implementation guidance.
