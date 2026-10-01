@@ -181,7 +181,7 @@ Before production, verify that:
 - **[Validation Checklist](docs/validation-checklist.md)** — negative authorization, prompt-injection, poisoning, leakage, network, and operational release tests.
 - **[Examples](examples/README.md)** — ACL-aware schema, sample documents, trusted authorization filters, and adversarial test cases.
 - **[Automated Security Tests](tests/README.md)** — executable authorization and retrieval-policy checks, with GitHub Actions CI.
-- **[Azure Deployment](deploy/README.md)** — low-cost Bicep lab, ACL-aware index bootstrap, authorized query example, and production-hardening path.
+- **[Azure Deployment](deploy/README.md)** — low-cost Bicep lab, ACL-aware index bootstrap, authorized query example, and a separate **[production-hardening baseline](deploy/production/README.md)** with Private Link, RBAC-only Search, Key Vault, diagnostics, and workload-identity separation.
 
 ## Scope
 
