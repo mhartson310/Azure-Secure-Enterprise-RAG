@@ -29,3 +29,6 @@ jobs:
 
       - name: Build production Bicep
         run: az bicep build --file deploy/production/main.bicep
+
+      - name: Build Container App Bicep
+        run: az bicep build --file deploy/production/app.bicep
