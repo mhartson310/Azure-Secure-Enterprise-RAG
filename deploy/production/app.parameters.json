@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appName": {
+      "value": "secure-rag-api"
+    },
+    "managedEnvironmentId": {
+      "value": "<output: containerAppsEnvironmentId>"
+    },
+    "appIdentityResourceId": {
+      "value": "<output: appIdentityResourceId>"
+    },
+    "appIdentityClientId": {
+      "value": "<output: appIdentityClientId>"
+    },
+    "registryServer": {
+      "value": "<output: registryServer>"
+    },
+    "appImage": {
+      "value": "<registry>.azurecr.io/secure-rag-api:v1"
+    },
+    "searchEndpoint": {
+      "value": "<output: searchEndpoint>"
+    },
+    "openaiEndpoint": {
+      "value": "<output: foundryEndpoint>"
+    },
+    "openaiDeployment": {
+      "value": "<your-model-deployment-name>"
+    }
+  }
+}
