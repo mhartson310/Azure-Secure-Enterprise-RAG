@@ -170,7 +170,7 @@ Before production, verify that:
 - [x] Secure retrieval examples
 - [x] Sample authorization/security-filter implementation
 - [x] Adversarial security test cases
-- [ ] Deployment and configuration examples
+- [x] Azure Bicep deployment and configuration path
 - [x] Evaluation harness and automated test execution
 
 ### Deep dives
@@ -181,6 +181,7 @@ Before production, verify that:
 - **[Validation Checklist](docs/validation-checklist.md)** — negative authorization, prompt-injection, poisoning, leakage, network, and operational release tests.
 - **[Examples](examples/README.md)** — ACL-aware schema, sample documents, trusted authorization filters, and adversarial test cases.
 - **[Automated Security Tests](tests/README.md)** — executable authorization and retrieval-policy checks, with GitHub Actions CI.
+- **[Azure Deployment](deploy/README.md)** — low-cost Bicep lab, ACL-aware index bootstrap, authorized query example, and production-hardening path.
 
 ## Scope
 
