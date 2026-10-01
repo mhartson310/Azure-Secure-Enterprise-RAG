@@ -31,16 +31,20 @@ var suffix = uniqueString(resourceGroup().id, baseName)
 
 var vnetName = 'vnet-${baseName}-${suffix}'
 var peSubnetName = 'snet-private-endpoints'
+var appSubnetName = 'snet-container-apps'
 var searchName = toLower('srch-${baseName}-${suffix}')
 var foundryName = toLower('ai-${baseName}-${suffix}')
 var vaultName = toLower('kv-${baseName}-${suffix}')
 var logName = 'log-${baseName}-${suffix}'
 var appIdentityName = 'id-${baseName}-app-${suffix}'
 var ingestionIdentityName = 'id-${baseName}-ingest-${suffix}'
+var registryName = toLower(replace('acr${baseName}${suffix}', '-', ''))
+var containerEnvName = 'cae-${baseName}-${suffix}'
 
 var searchPrivateDnsZoneName = 'privatelink.search.windows.net'
 var cognitivePrivateDnsZoneName = 'privatelink.cognitiveservices.azure.com'
 var keyVaultPrivateDnsZoneName = 'privatelink.vaultcore.azure.net'
+var registryPrivateDnsZoneName = 'privatelink.azurecr.io'
 
 var searchIndexDataReaderRoleId = subscriptionResourceId(
   'Microsoft.Authorization/roleDefinitions',
@@ -57,6 +61,10 @@ var cognitiveServicesOpenAIUserRoleId = subscriptionResourceId(
 var keyVaultSecretsUserRoleId = subscriptionResourceId(
   'Microsoft.Authorization/roleDefinitions',
   '4633458b-17de-408a-b874-0445c86b69e6'
+)
+var acrPullRoleId = subscriptionResourceId(
+  'Microsoft.Authorization/roleDefinitions',
+  '7f951dda-4ed3-4680-a7ca-43fe172d538d'
 )
 
 resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
@@ -76,6 +84,20 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
           privateEndpointNetworkPolicies: 'Disabled'
         }
       }
+      {
+        name: appSubnetName
+        properties: {
+          addressPrefix: '10.42.2.0/24'
+          delegations: [
+            {
+              name: 'container-apps-environment'
+              properties: {
+                serviceName: 'Microsoft.App/environments'
+              }
+            }
+          ]
+        }
+      }
     ]
   }
   tags: tags
@@ -84,6 +106,11 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
 resource peSubnet 'Microsoft.Network/virtualNetworks/subnets@2024-05-01' existing = {
   parent: vnet
   name: peSubnetName
+}
+
+resource appSubnet 'Microsoft.Network/virtualNetworks/subnets@2024-05-01' existing = {
+  parent: vnet
+  name: appSubnetName
 }
 
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
@@ -107,6 +134,44 @@ resource appIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-3
 resource ingestionIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: ingestionIdentityName
   location: location
+  tags: tags
+}
+
+resource registry 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
+  name: registryName
+  location: location
+  sku: {
+    name: 'Premium'
+  }
+  properties: {
+    adminUserEnabled: false
+    publicNetworkAccess: 'Disabled'
+  }
+  tags: tags
+}
+
+resource containerEnv 'Microsoft.App/managedEnvironments@2025-07-01' = {
+  name: containerEnvName
+  location: location
+  properties: {
+    appLogsConfiguration: {
+      destination: 'log-analytics'
+      logAnalyticsConfiguration: {
+        customerId: logAnalytics.properties.customerId
+        sharedKey: listKeys(logAnalytics.id, '2023-09-01').primarySharedKey
+      }
+    }
+    vnetConfiguration: {
+      infrastructureSubnetId: appSubnet.id
+      internal: true
+    }
+    workloadProfiles: [
+      {
+        name: 'Consumption'
+        workloadProfileType: 'Consumption'
+      }
+    ]
+  }
   tags: tags
 }
 
@@ -198,6 +263,11 @@ resource keyVaultDns 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   location: 'global'
 }
 
+resource registryDns 'Microsoft.Network/privateDnsZones@2024-06-01' = {
+  name: registryPrivateDnsZoneName
+  location: 'global'
+}
+
 resource searchDnsLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: searchDns
   name: 'link-${vnet.name}'
@@ -224,6 +294,18 @@ resource cognitiveDnsLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks
 
 resource keyVaultDnsLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: keyVaultDns
+  name: 'link-${vnet.name}'
+  location: 'global'
+  properties: {
+    registrationEnabled: false
+    virtualNetwork: {
+      id: vnet.id
+    }
+  }
+}
+
+resource registryDnsLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
+  parent: registryDns
   name: 'link-${vnet.name}'
   location: 'global'
   properties: {
@@ -345,6 +427,53 @@ resource keyVaultDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZone
   }
 }
 
+resource registryPrivateEndpoint 'Microsoft.Network/privateEndpoints@2024-05-01' = {
+  name: 'pe-${registry.name}'
+  location: location
+  properties: {
+    subnet: {
+      id: peSubnet.id
+    }
+    privateLinkServiceConnections: [
+      {
+        name: 'registry'
+        properties: {
+          privateLinkServiceId: registry.id
+          groupIds: [
+            'registry'
+          ]
+        }
+      }
+    ]
+  }
+  tags: tags
+}
+
+resource registryDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2024-05-01' = {
+  parent: registryPrivateEndpoint
+  name: 'default'
+  properties: {
+    privateDnsZoneConfigs: [
+      {
+        name: 'registry'
+        properties: {
+          privateDnsZoneId: registryDns.id
+        }
+      }
+    ]
+  }
+}
+
+resource appRegistryPull 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(registry.id, appIdentity.id, acrPullRoleId)
+  scope: registry
+  properties: {
+    principalId: appIdentity.properties.principalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: acrPullRoleId
+  }
+}
+
 resource appSearchReader 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(search.id, appIdentity.id, searchIndexDataReaderRoleId)
   scope: search
@@ -454,3 +583,9 @@ output ingestionIdentityClientId string = ingestionIdentity.properties.clientId
 output ingestionIdentityPrincipalId string = ingestionIdentity.properties.principalId
 output logAnalyticsWorkspaceId string = logAnalytics.id
 output privateEndpointSubnetId string = peSubnet.id
+output containerAppsSubnetId string = appSubnet.id
+output containerAppsEnvironmentId string = containerEnv.id
+output containerAppsEnvironmentName string = containerEnv.name
+output registryName string = registry.name
+output registryServer string = registry.properties.loginServer
+output appIdentityResourceId string = appIdentity.id
