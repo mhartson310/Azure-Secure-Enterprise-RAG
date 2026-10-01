@@ -172,3 +172,20 @@ Response:
 - production-grade rate limiting.
 
 Those should be added deliberately, not hidden inside a demo.
+
+
+## Security telemetry
+
+The application emits structured, single-line JSON security events through [`telemetry.py`](telemetry.py).
+
+Current events include:
+
+- `rag_query_started`
+- `rag_query_completed`
+- `rag_no_authorized_context`
+- `rag_authorization_denied`
+- `rag_request_failed`
+
+The telemetry intentionally avoids raw prompts, retrieved content, generated responses, tokens, and secrets. User and tenant identifiers are pseudonymized before logging.
+
+See the [Microsoft Sentinel + KQL integration](../sentinel/README.md) for hunting queries, detection candidates, and triage guidance.
