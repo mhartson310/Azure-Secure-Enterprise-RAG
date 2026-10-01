@@ -222,6 +222,8 @@ az group delete \
   --no-wait
 ```
 
-## Next hardening step
+## Production-hardening path
 
-The next infrastructure iteration should introduce a separate `production` module with Private Link, private DNS, RBAC-only Search access, monitoring, and explicit workload identity assignments rather than making the learning template needlessly expensive and complex.
+A separate production-oriented baseline is now available at [`deploy/production/`](production/README.md).
+
+It adds Private Endpoints, Private DNS, RBAC-only Search access, Key Vault, Log Analytics diagnostics, and explicit separation between the runtime application identity and the ingestion identity while keeping the low-cost lab intentionally simple.
