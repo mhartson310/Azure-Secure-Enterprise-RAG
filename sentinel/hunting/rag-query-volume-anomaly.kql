@@ -17,13 +17,14 @@ let RAGSecurityEvents = () {
         StatusCode = toint(evt.status_code),
         Reason = tostring(evt.reason);
 };
-
-let baseline =
+let hourlyBaseline =
     RAGSecurityEvents()
     | where EventType == "rag_query_completed"
     | where TimeGenerated between (ago(7d) .. ago(1h))
-    | summarize BaselinePerHour=avg(Count) by UserHash
-    | project UserHash, BaselinePerHour;
+    | summarize HourlyCount=count() by UserHash, bin(TimeGenerated, 1h);
+let baseline =
+    hourlyBaseline
+    | summarize BaselinePerHour=avg(HourlyCount) by UserHash;
 RAGSecurityEvents()
 | where EventType == "rag_query_completed"
 | where TimeGenerated > ago(1h)
