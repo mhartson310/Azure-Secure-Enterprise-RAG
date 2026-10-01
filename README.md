@@ -184,6 +184,7 @@ Before production, verify that:
 - **[Automated Security Tests](tests/README.md)** — executable authorization and retrieval-policy checks, with GitHub Actions CI.
 - **[Azure Deployment](deploy/README.md)** — low-cost Bicep lab, ACL-aware index bootstrap, authorized query example, and a separate **[production-hardening baseline](deploy/production/README.md)** with Private Link, RBAC-only Search, Key Vault, diagnostics, and workload-identity separation.
 - **[Secure RAG API](app/README.md)** — FastAPI reference implementation that derives trusted identity context, enforces retrieval authorization, sends only authorized context to the model, and returns source-backed citations.
+- **[Container Apps compute](deploy/production/COMPUTE.md)** — private Azure Container Apps + Premium ACR deployment path using managed identity, private networking, health probes, and independent application revisions.
 
 ## Scope
 
