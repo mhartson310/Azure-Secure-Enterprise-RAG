@@ -18,9 +18,11 @@ This template deploys:
   - RBAC authorization;
   - purge protection;
   - public access disabled;
-- a dedicated virtual network and private-endpoint subnet;
+- a dedicated virtual network, private-endpoint subnet, and delegated Container Apps infrastructure subnet;
 - Private Endpoints for Search, Foundry/Azure AI Services, and Key Vault;
 - linked Private DNS zones;
+- Azure Container Registry Premium with a Private Endpoint;
+- an internal Azure Container Apps workload-profiles environment;
 - two explicit user-assigned managed identities:
   - **application identity** for query/model runtime;
   - **ingestion identity** for index writes;
@@ -197,3 +199,19 @@ This reference baseline can be extended with:
 5. Microsoft Sentinel analytics/incident integration;
 6. Azure Policy assignments for private access, diagnostics, approved regions, and managed identity;
 7. multi-region design where availability requirements justify the cost.
+
+
+## Application compute
+
+The production platform is intentionally separated from application releases.
+
+After deploying this baseline, use [`app.bicep`](app.bicep) and the [Container Apps compute guide](COMPUTE.md) to:
+
+1. build the FastAPI image;
+2. push it to private ACR;
+3. deploy it to the internal Container Apps environment;
+4. attach the existing application managed identity;
+5. configure Microsoft Entra authentication;
+6. validate the end-to-end authorization path.
+
+This preserves a clean boundary between long-lived platform infrastructure and frequently changing application revisions.
