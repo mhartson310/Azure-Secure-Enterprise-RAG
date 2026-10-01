@@ -24,5 +24,8 @@ jobs:
       - name: Show Azure CLI version
         run: az version
 
-      - name: Build Bicep
+      - name: Build lab Bicep
         run: az bicep build --file deploy/main.bicep
+
+      - name: Build production Bicep
+        run: az bicep build --file deploy/production/main.bicep
