@@ -15,6 +15,20 @@ This repository focuses on the part many RAG diagrams leave out: **where the sys
 - deployable infrastructure and application patterns;
 - security telemetry, Sentinel/KQL detections, and validation workflows.
 
+## Engineering proof and review path
+
+**Problem → Architecture → Trust boundaries → Threats → Controls → Deployment → Validation → Monitoring**
+
+| Review question | Evidence |
+|---|---|
+| How is the system designed? | [Architecture](architecture/README.md) |
+| Which threats matter? | [Threat model](docs/threat-model.md) |
+| Which controls protect retrieval? | [Security controls](docs/security-controls.md) |
+| How is the implementation exercised? | [Validation checklist](docs/validation-checklist.md) and [tests](tests) |
+| Where is operational monitoring? | [Sentinel artifacts](sentinel) |
+
+**Evidence boundary:** Source code, checklists, and automated checks demonstrate implementation intent. Do not interpret them as evidence of a live production deployment or full penetration-test coverage.
+
 ## Architecture
 
 ![Secure Enterprise RAG on Azure](architecture/secure-enterprise-rag.svg)
