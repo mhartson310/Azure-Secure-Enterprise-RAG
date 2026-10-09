@@ -6,6 +6,15 @@ A practical reference architecture for building enterprise Retrieval-Augmented G
 
 This repository focuses on the part many RAG diagrams leave out: **where the system can fail and which controls belong in the architecture before production.**
 
+## What this demonstrates
+
+- secure enterprise RAG architecture on Azure;
+- identity-aware and permission-aware retrieval;
+- threat modeling for prompt injection, indirect injection, poisoning, and data exposure;
+- Managed Identity, Private Link, Key Vault, Policy, Defender, Purview, and Monitor integration;
+- deployable infrastructure and application patterns;
+- security telemetry, Sentinel/KQL detections, and validation workflows.
+
 ## Architecture
 
 ![Secure Enterprise RAG on Azure](architecture/secure-enterprise-rag.svg)
