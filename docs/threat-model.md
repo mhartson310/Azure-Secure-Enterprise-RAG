@@ -2,6 +2,9 @@
 
 This threat model focuses on the security boundary between user identity, retrieval, enterprise data, prompt assembly, and model inference.
 
+[Leadership threat-model summary](threat-model-leadership-summary.md) · [Executive decision brief](executive-decision-brief.md)
+
+
 > **Key principle:** retrieved content is untrusted input, and authorization must be enforced before source text reaches the model.
 
 ## Assets
