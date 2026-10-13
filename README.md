@@ -10,6 +10,10 @@ This repository focuses on the part many RAG diagrams leave out: **where the sys
 
 [Explore the business-driven decision guide](docs/decision-framework/README.md): **Should we use AI at all? RAG vs fine-tuning? Managed platform vs custom architecture? Which model/vendor?** Includes measurable business hypotheses, security/governance gates, cost drivers, and validation criteria. Reuses the [portfolio ADR and business-case templates](https://github.com/mhartson310/Azure-Zero-Trust-Reference-Architectures/tree/main/docs/decision-framework/architecture-decision-framework).
 
+## Leadership decision documents
+
+Start with the [executive decision brief](docs/executive-decision-brief.md) for the business ask, timing, costs, cost of inaction, and next action. The [leadership threat-model summary](docs/threat-model-leadership-summary.md) compresses the most consequential confidentiality and answer-integrity paths. Both reference the detailed design and **do not** claim production validation.
+
 ## What this demonstrates
 
 - secure enterprise RAG architecture on Azure;
