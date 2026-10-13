@@ -4,6 +4,8 @@
 
 Use the [reusable decision framework](https://github.com/mhartson310/Azure-Zero-Trust-Reference-Architectures/tree/main/docs/decision-framework/architecture-decision-framework), including the [ADR template](https://github.com/mhartson310/Azure-Zero-Trust-Reference-Architectures/tree/main/docs/decision-framework/architecture-decision-framework/ADR-template.md) and [business-case template](https://github.com/mhartson310/Azure-Zero-Trust-Reference-Architectures/tree/main/docs/decision-framework/architecture-decision-framework/business-case-template.md).
 
+[Executive decision brief](../executive-decision-brief.md) · [Leadership threat-model summary](../threat-model-leadership-summary.md) ·
+
 ## Business objective and measurements
 
 Help authorized employees retrieve and use enterprise knowledge without exposing documents they cannot access. Define source quality, answer relevance, privacy requirements, and expected organizational benefit before choosing an AI technology.
