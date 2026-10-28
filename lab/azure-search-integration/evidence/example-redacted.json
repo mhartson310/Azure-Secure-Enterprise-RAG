@@ -1,0 +1,12 @@
+{
+  "status": "NOT_RUN",
+  "description": "Illustrative schema only. Not evidence of a live Azure test.",
+  "timestamp_utc": null,
+  "azure_resource": "REDACTED",
+  "test_results": [],
+  "limitations": [
+    "No live deployment has been performed",
+    "No user token or tenant identity validation",
+    "Search Free tier uses a public endpoint and lab-only key"
+  ]
+}

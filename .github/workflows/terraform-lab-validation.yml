@@ -1,0 +1,43 @@
+name: Terraform lab static validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "lab/azure-search-integration/**"
+      - ".github/workflows/terraform-lab-validation.yml"
+  push:
+    branches: [main]
+    paths:
+      - "lab/azure-search-integration/**"
+      - ".github/workflows/terraform-lab-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-and-policy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lab/azure-search-integration
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+      - name: Terraform formatting
+        run: terraform -chdir=terraform fmt -check
+      - name: Terraform init (no backend)
+        run: terraform -chdir=terraform init -backend=false -input=false
+      - name: Terraform validate
+        run: terraform -chdir=terraform validate
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install offline test dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run synthetic policy tests (no Azure access)
+        run: python -m pytest -q test_policy.py

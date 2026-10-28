@@ -1,0 +1,12 @@
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/.terraform.lock.hcl
+**/terraform.tfvars
+**/*.auto.tfvars
+**/tfplan
+.env
+.pytest_cache/
+__pycache__/
+evidence/*.json
+!evidence/example-redacted.json
