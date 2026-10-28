@@ -6,6 +6,16 @@ A practical reference architecture for building enterprise Retrieval-Augmented G
 
 This repository focuses on the part many RAG diagrams leave out: **where the system can fail and which controls belong in the architecture before production.**
 
+## Where this repository fits: implementation and verification
+
+**This is the implementation companion** to the [Secure Enterprise RAG V2 architecture blueprint](https://github.com/mhartson310/Azure-AI-Security-Reference-Architectures/tree/main/01-secure-enterprise-rag) in the wider [Azure AI Security Reference Architectures](https://github.com/mhartson310/Azure-AI-Security-Reference-Architectures) collection.
+
+| Use this repository for | Use the architecture library for |
+|---|---|
+| [FastAPI application](app/README.md), [Azure deployment paths](deploy/README.md), [security tests](tests/README.md), and [Sentinel detection patterns](sentinel/README.md) | [Seven trust boundaries](https://github.com/mhartson310/Azure-AI-Security-Reference-Architectures/tree/main/01-secure-enterprise-rag/architecture), [Azure service controls](https://github.com/mhartson310/Azure-AI-Security-Reference-Architectures/tree/main/01-secure-enterprise-rag/security-controls), [ADRs](https://github.com/mhartson310/Azure-AI-Security-Reference-Architectures/tree/main/01-secure-enterprise-rag/adr), and [evidence-led negative tests](https://github.com/mhartson310/Azure-AI-Security-Reference-Architectures/tree/main/01-secure-enterprise-rag/validation) |
+
+**Implementation evidence note:** [GitHub Actions security tests](https://github.com/mhartson310/Azure-Secure-Enterprise-RAG/actions/workflows/security-tests.yml) must be inspected for actual current pass/fail results. The latest run observed during the October 28 portfolio review was failing. A documented test is **not** proof that an Azure deployment has passed.
+
 ## Architecture decisions and business value
 
 [Explore the business-driven decision guide](docs/decision-framework/README.md): **Should we use AI at all? RAG vs fine-tuning? Managed platform vs custom architecture? Which model/vendor?** Includes measurable business hypotheses, security/governance gates, cost drivers, and validation criteria. Reuses the [portfolio ADR and business-case templates](https://github.com/mhartson310/Azure-Zero-Trust-Reference-Architectures/tree/main/docs/decision-framework/architecture-decision-framework).
