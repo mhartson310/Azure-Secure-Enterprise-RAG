@@ -1,0 +1,10 @@
+# Copy locally to terraform.tfvars (ignored by git) or supply environment variables.
+# Never commit subscription IDs or secrets from your environment.
+subscription_id      = "00000000-0000-0000-0000-000000000000"
+location             = "westus2"
+resource_group_name  = "rg-rag-authz-lab"
+search_service_name  = "rag-authz-lab-change-to-globally-unique"
+tags = {
+  environment = "lab"
+  purpose     = "negative-security-testing"
+}
